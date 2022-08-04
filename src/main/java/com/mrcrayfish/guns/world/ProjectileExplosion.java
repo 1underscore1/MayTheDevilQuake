@@ -145,7 +145,12 @@ public class ProjectileExplosion extends Explosion
 
             double blockDensity = (double) getSeenPercent(explosionPos, entity);
             double damage = (1.0D - strength) * blockDensity;
-            entity.hurt(this.getDamageSource(), (float) ((int) ((damage * damage + damage) / 2.0D * 7.0D * (double) radius + 1.0D)));
+            float finalDamage = (float) ((int) ((damage * damage + damage) / 2.0D * 7.0D * (double) radius + 1.0D));
+            if(finalDamage > 4.0 && entity instanceof Player player)
+            {
+            	finalDamage = 4.0F;
+            }
+            entity.hurt(this.getDamageSource(), finalDamage);
 
             double blastDamage = damage;
             if(entity instanceof LivingEntity)

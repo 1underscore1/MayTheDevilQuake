@@ -169,7 +169,7 @@ public class ServerPlayHandler
                             int level = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.RECLAIMED.get(), heldItem);
                             if(level == 0 || player.level.random.nextInt(4 - Mth.clamp(level, 1, 2)) != 0)
                             {
-                                tag.putInt("AmmoCount", Math.max(0, tag.getInt("AmmoCount") - 1));
+                                tag.putInt("AmmoCount", Math.max(0, tag.getInt("AmmoCount") - modifiedGun.getGeneral().getAmmoConsumed()));
                             }
                         }
                     }

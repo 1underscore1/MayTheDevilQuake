@@ -67,9 +67,9 @@ public class GunGen extends GunProvider
                 .build());
 
         this.addGun(new ResourceLocation(Reference.MOD_ID, "grenade_launcher"), Gun.Builder.create()
-                .setFireRate(20)
+                .setFireRate(5)
                 .setGripType(GripType.TWO_HANDED)
-                .setMaxAmmo(1)
+                .setMaxAmmo(6)
                 .setRecoilAngle(5.0F)
                 .setRecoilKick(1.0F)
                 .setRecoilDurationOffset(0.25F)
@@ -246,6 +246,32 @@ public class GunGen extends GunProvider
                 .setScope(1.0F, 0.0, 4.4, 4.0)
                 .setBarrel(0.5F, 0.0, 3.6506, -3.8)
                 .setStock(1.0F, 0.0, 3.6506, 8.4)
+                .build());
+
+        this.addGun(new ResourceLocation(Reference.MOD_ID, "super_shotgun"), Gun.Builder.create()
+                .setFireRate(12)
+                .setGripType(GripType.TWO_HANDED)
+                .setMaxAmmo(2)
+                .setReloadAmount(2)
+                .setRecoilKick(0.5F)
+                .setRecoilAngle(10.0F)
+                .setRecoilAdsReduction(0.4F)
+                .setProjectileAmount(30)
+                .setAlwaysSpread(true)
+                .setSpread(50.0F)
+                .setAmmoConsumed(2)
+                .setAmmo(ModItems.SHELL.get())
+                .setDamage(100.0F)
+                .setProjectileSize(1.0F)
+                .setProjectileSpeed(10.0)
+                .setProjectileLife(5)
+                .setFireSound(ModSounds.ITEM_SHOTGUN_FIRE.get())
+                .setReloadSound(ModSounds.ITEM_PISTOL_RELOAD.get())
+                .setCockSound(ModSounds.ITEM_SHOTGUN_COCK.get())
+                .setSilencedFireSound(ModSounds.ITEM_SHOTGUN_SILENCED_FIRE.get())
+                .setEnchantedFireSound(ModSounds.ITEM_SHOTGUN_ENCHANTED_FIRE.get())
+                .setMuzzleFlash(0.5, 0.0, 3.6505, -3.81)
+                .setZoom(0.7F, 0.0, 5.1, 3.2)
                 .build());
     }
 }

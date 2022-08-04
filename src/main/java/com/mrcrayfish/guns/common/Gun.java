@@ -11,6 +11,7 @@ import com.mrcrayfish.guns.item.attachment.IAttachment;
 import com.mrcrayfish.guns.item.attachment.IScope;
 import com.mrcrayfish.guns.item.attachment.impl.Scope;
 import com.mrcrayfish.guns.util.GunJsonUtil;
+import com.mrcrayfish.guns.item.GunItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
@@ -81,6 +82,9 @@ public final class Gun implements INBTSerializable<CompoundTag>
         @Optional
         private float spread;
 
+        @Optional
+        private int ammoConsumed = 1;
+
         @Override
         public CompoundTag serializeNBT()
         {
@@ -97,6 +101,8 @@ public final class Gun implements INBTSerializable<CompoundTag>
             tag.putInt("ProjectileAmount", this.projectileAmount);
             tag.putBoolean("AlwaysSpread", this.alwaysSpread);
             tag.putFloat("Spread", this.spread);
+            
+            tag.putInt("AmmoConsumed", this.ammoConsumed);
             return tag;
         }
 
@@ -151,6 +157,10 @@ public final class Gun implements INBTSerializable<CompoundTag>
             {
                 this.spread = tag.getFloat("Spread");
             }
+            if(tag.contains("AmmoConsumed", Tag.TAG_ANY_NUMERIC))
+            {
+                this.ammoConsumed = tag.getInt("AmmoConsumed");
+            }
         }
 
         public JsonObject toJsonObject()
@@ -177,6 +187,7 @@ public final class Gun implements INBTSerializable<CompoundTag>
             if(this.projectileAmount != 1) object.addProperty("projectileAmount", this.projectileAmount);
             if(this.alwaysSpread) object.addProperty("alwaysSpread", true);
             if(this.spread != 0.0F) object.addProperty("spread", this.spread);
+            if(this.ammoConsumed != 1) object.addProperty("ammoConsumed", this.ammoConsumed);
             return object;
         }
 
@@ -198,6 +209,7 @@ public final class Gun implements INBTSerializable<CompoundTag>
             general.projectileAmount = this.projectileAmount;
             general.alwaysSpread = this.alwaysSpread;
             general.spread = this.spread;
+            general.ammoConsumed = this.ammoConsumed;
             return general;
         }
 
@@ -296,6 +308,14 @@ public final class Gun implements INBTSerializable<CompoundTag>
         public float getSpread()
         {
             return this.spread;
+        }
+
+        /**
+         * @return The amount of ammo this weapon consumes when it fires.
+         */
+        public int getAmmoConsumed()
+        {
+            return this.ammoConsumed;
         }
     }
 
@@ -1369,7 +1389,10 @@ public final class Gun implements INBTSerializable<CompoundTag>
     public static boolean hasAmmo(ItemStack gunStack)
     {
         CompoundTag tag = gunStack.getOrCreateTag();
-        return tag.getBoolean("IgnoreAmmo") || tag.getInt("AmmoCount") > 0;
+        GunItem item = (GunItem) gunStack.getItem();
+        Gun modifiedGun = item.getModifiedGun(gunStack);
+        
+        return tag.getBoolean("IgnoreAmmo") || tag.getInt("AmmoCount") >= modifiedGun.getGeneral().getAmmoConsumed();
     }
 
     public static class Builder
@@ -1460,6 +1483,12 @@ public final class Gun implements INBTSerializable<CompoundTag>
         public Builder setSpread(float spread)
         {
             this.gun.general.spread = spread;
+            return this;
+        }
+
+        public Builder setAmmoConsumed(int ammoConsumed)
+        {
+            this.gun.general.ammoConsumed = ammoConsumed;
             return this;
         }
 
