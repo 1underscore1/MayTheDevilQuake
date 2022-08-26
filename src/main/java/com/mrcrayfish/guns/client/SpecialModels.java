@@ -29,7 +29,15 @@ public enum SpecialModels
     MINI_GUN_BARRELS("mini_gun_barrels"),
     GRENADE_LAUNCHER_BASE("grenade_launcher_base"),
     GRENADE_LAUNCHER_CYLINDER("grenade_launcher_cylinder"),
-    SUPER_SHOTGUN("gun/super_shotgun");
+    SUPER_SHOTGUN("gun/super_shotgun"),
+    LASER_PISTOL("gun/laser_pistol"),
+    LASER_RING("laser_ring"),
+    NAIL_UZI("gun/nail_uzi"),
+    NAIL_UZI_BASE("nail_uzi_base"),
+    NAIL_UZI_NAIL("nail_uzi_nail"),
+    NAIL_SHOTGUN("gun/nail_shotgun"),
+    NAIL_SHOTGUN_BASE("nail_shotgun_base"),
+    NAIL_SHOTGUN_BARRELS("nail_shotgun_barrels");
 
     /**
      * The location of an item model in the [MOD_ID]/models/special/[NAME] folder

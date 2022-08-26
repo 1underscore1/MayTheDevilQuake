@@ -47,6 +47,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.network.PacketDistributor;
@@ -106,15 +107,18 @@ public class ServerPlayHandler
                     int count = modifiedGun.getGeneral().getProjectileAmount();
                     Gun.Projectile projectileProps = modifiedGun.getProjectile();
                     ProjectileEntity[] spawnedProjectiles = new ProjectileEntity[count];
+                    boolean doFirstTick = projectileProps.getProjectileOffset().equals(Vec3.ZERO);
                     for(int i = 0; i < count; i++)
                     {
-                        IProjectileFactory factory = ProjectileManager.getInstance().getFactory(projectileProps.getItem());
+                        IProjectileFactory factory = ProjectileManager.getInstance().getFactory(projectileProps.getProjectileItem());
                         ProjectileEntity projectileEntity = factory.create(world, player, heldItem, item, modifiedGun);
                         projectileEntity.setWeapon(heldItem);
                         projectileEntity.setAdditionalDamage(Gun.getAdditionalDamage(heldItem));
                         world.addFreshEntity(projectileEntity);
                         spawnedProjectiles[i] = projectileEntity;
-                        projectileEntity.tick();
+                        if (doFirstTick) {
+                        	projectileEntity.tick();
+                        }
                     }
                     if(!projectileProps.isVisible())
                     {

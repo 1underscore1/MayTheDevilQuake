@@ -10,8 +10,11 @@ import com.mrcrayfish.guns.client.render.gun.model.GrenadeLauncherModel;
 import com.mrcrayfish.guns.client.render.gun.model.LongScopeModel;
 import com.mrcrayfish.guns.client.render.gun.model.MediumScopeModel;
 import com.mrcrayfish.guns.client.render.gun.model.MiniGunModel;
+import com.mrcrayfish.guns.client.render.gun.model.NailShotgunModel;
+import com.mrcrayfish.guns.client.render.gun.model.NailUziModel;
 import com.mrcrayfish.guns.client.render.gun.model.ShortScopeModel;
 import com.mrcrayfish.guns.client.render.gun.model.SimpleModel;
+import com.mrcrayfish.guns.client.render.layer.StuckNailsLayer;
 import com.mrcrayfish.guns.client.screen.AttachmentScreen;
 import com.mrcrayfish.guns.client.screen.WorkbenchScreen;
 import com.mrcrayfish.guns.client.settings.GunOptions;
@@ -27,14 +30,21 @@ import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.gui.components.OptionsList;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.MouseSettingsScreen;
+import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.packs.resources.ReloadableResourceManager;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.PolarBear;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -137,8 +147,11 @@ public class ClientHandler
         ModelOverrides.register(ModItems.PISTOL.get(), new SimpleModel(SpecialModels.PISTOL::getModel));
         ModelOverrides.register(ModItems.RIFLE.get(), new SimpleModel(SpecialModels.RIFLE::getModel));
         ModelOverrides.register(ModItems.SHOTGUN.get(), new SimpleModel(SpecialModels.SHOTGUN::getModel));
-        
+
         ModelOverrides.register(ModItems.SUPER_SHOTGUN.get(), new SimpleModel(SpecialModels.SUPER_SHOTGUN::getModel));
+        ModelOverrides.register(ModItems.LASER_PISTOL.get(), new SimpleModel(SpecialModels.LASER_PISTOL::getModel));
+        ModelOverrides.register(ModItems.NAIL_UZI.get(), new NailUziModel());
+        ModelOverrides.register(ModItems.NAIL_SHOTGUN.get(), new NailShotgunModel());
 
         /* Attachments */
         ModelOverrides.register(ModItems.SHORT_SCOPE.get(), new ShortScopeModel());
@@ -187,6 +200,14 @@ public class ClientHandler
             }
         }
     }
+    
+//    @SubscribeEvent
+//    public static void onAddRenderLayers(EntityRenderersEvent.AddLayers event)
+//    {
+//    	
+//    	LivingEntityRenderer<PolarBear, AgeableListModel<PolarBear>> PolarBearRenderer = event.getRenderer(EntityType.POLAR_BEAR);
+//    	PolarBearRenderer.addLayer(new StuckNailsLayer<>(PolarBearRenderer));
+//    }
 
     /* Uncomment for debugging headshot hit boxes */
 

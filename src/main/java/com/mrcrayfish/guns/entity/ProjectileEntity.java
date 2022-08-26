@@ -1,6 +1,7 @@
 package com.mrcrayfish.guns.entity;
 
 import com.mrcrayfish.guns.Config;
+import com.mrcrayfish.guns.client.handler.AimingHandler;
 import com.mrcrayfish.guns.common.BoundingBoxManager;
 import com.mrcrayfish.guns.common.Gun;
 import com.mrcrayfish.guns.common.Gun.Projectile;
@@ -126,8 +127,15 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         double posY = shooter.yOld + (shooter.getY() - shooter.yOld) / 2.0 + shooter.getEyeHeight();
         double posZ = shooter.zOld + (shooter.getZ() - shooter.zOld) / 2.0;
         this.setPos(posX, posY, posZ);
-
-        Item ammo = ForgeRegistries.ITEMS.getValue(this.projectile.getItem());
+        
+        // Offset the projectile
+        // TODO: need to implement ADS offset interpolation
+        Vec3 rightOffset = this.projectile.getProjectileOffset();
+        Vec3 centerOffset = this.projectile.getProjectileOffset().multiply(1D, 0D, 1D);
+        Vec3 pOff = this.getProjectileOffset(shooter, rightOffset, centerOffset);
+        this.setPos(this.position().add(pOff));
+        
+        Item ammo = ForgeRegistries.ITEMS.getValue(this.projectile.getProjectileItem());
         if(ammo != null)
         {
             int customModelData = -1;
@@ -605,6 +613,20 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         float f2 = -Mth.cos(-pitch * 0.017453292F);
         float f3 = Mth.sin(-pitch * 0.017453292F);
         return new Vec3((double) (f1 * f2), (double) f3, (double) (f * f2));
+    }
+    
+    private Vec3 getProjectileOffset(Entity shooter, Vec3 offsetRight, Vec3 offsetCenter)
+    {
+        float aimProgress = 0.0F;
+        if (shooter instanceof Player) { // no idea why it wouldn't be but i'll check anyway
+        	AimingHandler aimingHandler = AimingHandler.get();
+        	aimProgress = aimingHandler.getAimProgress((Player) shooter, 0.0F);
+        }
+        Vec3 dir0 = offsetRight.lerp(offsetCenter, (double) aimProgress);
+        Vec3 dir1 = this.getVectorFromRotation(shooter.getXRot(), shooter.getYRot()).scale(dir0.x()); // forward
+        Vec3 dir2 = this.getVectorFromRotation(0.0F, shooter.getYRot() + 90.0F).scale(dir0.y()); // to the right
+        Vec3 dir3 = this.getVectorFromRotation(shooter.getXRot() + 90.0F, shooter.getYRot()).scale(dir0.z()); // down
+        return dir1.add(dir2).add(dir3);
     }
 
     /**

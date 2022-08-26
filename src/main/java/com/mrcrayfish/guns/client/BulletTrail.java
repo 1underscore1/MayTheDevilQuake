@@ -10,6 +10,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+
+import com.mrcrayfish.guns.init.ModItems;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -175,7 +178,7 @@ public class BulletTrail
     public boolean isTrailVisible()
     {
         Entity entity = Minecraft.getInstance().getCameraEntity();
-        return entity != null && entity.getId() != this.shooterId;
+        return entity != null && (this.getItem().is(ModItems.NAIL.get()) || entity.getId() != this.shooterId);
     }
 
     @Override

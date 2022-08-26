@@ -19,6 +19,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -336,7 +337,18 @@ public final class Gun implements INBTSerializable<CompoundTag>
         private int trailColor = 0xFFD289;
         @Optional
         private double trailLengthMultiplier = 1.0;
+        
+        @Optional
+        private ResourceLocation projectileItem = new ResourceLocation(Reference.MOD_ID, "basic_ammo");
 
+        @Optional
+        private double projectileOffsetX = 0.0;
+        @Optional
+        private double projectileOffsetY = 0.0;
+        @Optional
+        private double projectileOffsetZ = 0.0;
+        
+        
         @Override
         public CompoundTag serializeNBT()
         {
@@ -351,6 +363,10 @@ public final class Gun implements INBTSerializable<CompoundTag>
             tag.putBoolean("DamageReduceOverLife", this.damageReduceOverLife);
             tag.putInt("TrailColor", this.trailColor);
             tag.putDouble("TrailLengthMultiplier", this.trailLengthMultiplier);
+            tag.putString("ProjectileItem", this.projectileItem.toString());
+            tag.putDouble("ProjectileOffsetX", this.projectileOffsetX);
+            tag.putDouble("ProjectileOffsetY", this.projectileOffsetY);
+            tag.putDouble("ProjectileOffsetZ", this.projectileOffsetZ);
             return tag;
         }
 
@@ -397,6 +413,22 @@ public final class Gun implements INBTSerializable<CompoundTag>
             {
                 this.trailLengthMultiplier = tag.getDouble("TrailLengthMultiplier");
             }
+            if(tag.contains("ProjectileItem", Tag.TAG_STRING))
+            {
+                this.projectileItem = new ResourceLocation(tag.getString("ProjectileItem"));
+            }
+            if(tag.contains("ProjectileOffsetX", Tag.TAG_ANY_NUMERIC))
+            {
+                this.projectileOffsetX = tag.getDouble("ProjectileOffsetX");
+            }
+            if(tag.contains("ProjectileOffsetY", Tag.TAG_ANY_NUMERIC))
+            {
+                this.projectileOffsetY = tag.getDouble("ProjectileOffsetY");
+            }
+            if(tag.contains("ProjectileOffsetZ", Tag.TAG_ANY_NUMERIC))
+            {
+                this.projectileOffsetZ = tag.getDouble("ProjectileOffsetZ");
+            }
         }
 
         public JsonObject toJsonObject()
@@ -417,6 +449,10 @@ public final class Gun implements INBTSerializable<CompoundTag>
             if(this.damageReduceOverLife) object.addProperty("damageReduceOverLife", this.damageReduceOverLife);
             if(this.trailColor != 0xFFD289) object.addProperty("trailColor", this.trailColor);
             if(this.trailLengthMultiplier != 1.0) object.addProperty("trailLengthMultiplier", this.trailLengthMultiplier);
+            object.addProperty("projectileItem", this.projectileItem.toString());
+            if(this.projectileOffsetX != 0.0) object.addProperty("projectileOffsetX", this.projectileOffsetX);
+            if(this.projectileOffsetY != 0.0) object.addProperty("projectileOffsetY", this.projectileOffsetY);
+            if(this.projectileOffsetZ != 0.0) object.addProperty("projectileOffsetZ", this.projectileOffsetZ);
             return object;
         }
 
@@ -433,6 +469,10 @@ public final class Gun implements INBTSerializable<CompoundTag>
             projectile.damageReduceOverLife = this.damageReduceOverLife;
             projectile.trailColor = this.trailColor;
             projectile.trailLengthMultiplier = this.trailLengthMultiplier;
+            projectile.projectileItem = this.projectileItem;
+            projectile.projectileOffsetX = this.projectileOffsetX;
+            projectile.projectileOffsetY = this.projectileOffsetY;
+            projectile.projectileOffsetZ = this.projectileOffsetZ;
             return projectile;
         }
 
@@ -514,6 +554,38 @@ public final class Gun implements INBTSerializable<CompoundTag>
         public double getTrailLengthMultiplier()
         {
             return this.trailLengthMultiplier;
+        }
+
+        /**
+         * @return The registry id of the item fired
+         */
+        public ResourceLocation getProjectileItem()
+        {
+            return this.projectileItem;
+        }
+        
+        /**
+         * @return The amount the projectile is offset when fired.
+         */
+        
+        public double getProjectileOffsetX()
+        {
+        	return this.projectileOffsetX;
+        }
+        
+        public double getProjectileOffsetY()
+        {
+        	return this.projectileOffsetY;
+        }
+        
+        public double getProjectileOffsetZ()
+        {
+        	return this.projectileOffsetZ;
+        }
+        
+        public Vec3 getProjectileOffset()
+        {
+        	return new Vec3(this.projectileOffsetX, this.projectileOffsetY, this.projectileOffsetZ);
         }
     }
 
@@ -1495,6 +1567,7 @@ public final class Gun implements INBTSerializable<CompoundTag>
         public Builder setAmmo(Item item)
         {
             this.gun.projectile.item = item.getRegistryName();
+            this.gun.projectile.projectileItem = item.getRegistryName();
             return this;
         }
 
@@ -1550,6 +1623,18 @@ public final class Gun implements INBTSerializable<CompoundTag>
         {
             this.gun.projectile.damageReduceOverLife = damageReduceOverLife;
             return this;
+        }
+        public Builder setProjectileType(Item item)
+        {
+            this.gun.projectile.projectileItem = item.getRegistryName();
+            return this;
+        }
+        public Builder setProjectileOffset(double xOffset, double yOffset, double zOffset)
+        {
+        	this.gun.projectile.projectileOffsetX = xOffset;
+        	this.gun.projectile.projectileOffsetY = yOffset;
+        	this.gun.projectile.projectileOffsetZ = zOffset;
+        	return this;
         }
 
         public Builder setFireSound(SoundEvent sound)

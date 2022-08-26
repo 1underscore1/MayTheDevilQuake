@@ -6,6 +6,7 @@ import com.mrcrayfish.framework.api.data.sync.SyncedClassKey;
 import com.mrcrayfish.framework.api.data.sync.SyncedDataKey;
 import com.mrcrayfish.guns.Reference;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 /**
@@ -30,11 +31,19 @@ public class ModSyncedDataKeys
             .defaultValueSupplier(() -> false)
             .resetOnDeath()
             .build();
+    
+    
+    public static final SyncedDataKey<LivingEntity, Integer> STUCK_NAILS = SyncedDataKey.builder(SyncedClassKey.LIVING_ENTITY, Serializers.INTEGER)
+            .id(new ResourceLocation(Reference.MOD_ID, "stucknails"))
+            .defaultValueSupplier(() -> 0)
+            .resetOnDeath()
+            .build();
 
     public static void register()
     {
         FrameworkAPI.registerSyncedDataKey(AIMING);
         FrameworkAPI.registerSyncedDataKey(SHOOTING);
         FrameworkAPI.registerSyncedDataKey(RELOADING);
+        FrameworkAPI.registerSyncedDataKey(STUCK_NAILS);
     }
 }

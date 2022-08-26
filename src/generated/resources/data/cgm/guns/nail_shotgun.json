@@ -1,0 +1,62 @@
+{
+  "general": {
+    "auto": true,
+    "rate": 10,
+    "gripType": "cgm:two_handed",
+    "maxAmmo": 40,
+    "reloadAmount": 20,
+    "recoilAngle": 10.0,
+    "recoilKick": 0.5,
+    "recoilAdsReduction": 0.4,
+    "projectileAmount": 15,
+    "alwaysSpread": true,
+    "spread": 30.0,
+    "ammoConsumed": 10
+  },
+  "projectile": {
+    "item": "cgm:nail",
+    "damage": 30.0,
+    "size": 0.0625,
+    "speed": 2.0,
+    "life": 20,
+    "trailColor": 9210623,
+    "projectileItem": "cgm:nail",
+    "projectileOffsetY": 0.15,
+    "projectileOffsetZ": 0.15
+  },
+  "sounds": {
+    "fire": "cgm:item.shotgun.fire",
+    "reload": "cgm:item.pistol.reload",
+    "cock": "cgm:item.shotgun.cock",
+    "silencedFire": "cgm:item.shotgun.silenced_fire",
+    "enchantedFire": "cgm:item.shotgun.enchanted_fire"
+  },
+  "display": {
+    "flash": {
+      "yOffset": 3.6505,
+      "zOffset": -3.81
+    }
+  },
+  "modules": {
+    "zoom": {
+      "yOffset": 5.1,
+      "zOffset": 3.2,
+      "fovModifier": 0.7
+    },
+    "attachments": {
+      "scope": {
+        "yOffset": 4.4,
+        "zOffset": 4.0
+      },
+      "barrel": {
+        "yOffset": 3.6506,
+        "zOffset": -3.8,
+        "scale": 0.5
+      },
+      "stock": {
+        "yOffset": 3.6506,
+        "zOffset": 8.4
+      }
+    }
+  }
+}

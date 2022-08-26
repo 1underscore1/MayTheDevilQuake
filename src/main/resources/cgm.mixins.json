@@ -15,7 +15,9 @@
         "client.MinecraftMixin",
         "client.MouseHandlerMixin",
         "client.PlayerItemInHandLayerMixin",
-        "client.PlayerModelMixin"
+        "client.PlayerModelMixin",
+		"client.AgeableListModelMixin",
+        "client.HierarchicalModelMixin"
     ],
     "injectors": {
         "defaultRequire": 1

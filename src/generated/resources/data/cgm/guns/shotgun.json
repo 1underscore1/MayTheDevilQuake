@@ -16,7 +16,8 @@
     "damage": 18.0,
     "size": 1.0,
     "speed": 10.0,
-    "life": 5
+    "life": 5,
+    "projectileItem": "cgm:shell"
   },
   "sounds": {
     "fire": "cgm:item.shotgun.fire",

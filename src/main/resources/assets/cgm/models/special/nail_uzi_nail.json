@@ -1,0 +1,36 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"2": "cgm:items/nail_projectile",
+		"particle": "cgm:items/nail_projectile"
+	},
+	"elements": [
+		{
+			"from": [7.375, 2.875, 7],
+			"to": [8.625, 2.885, 10.75],
+			"rotation": {"angle": 0, "axis": "z", "origin": [8, 2.875, 8.75]},
+			"faces": {
+				"up": {"uv": [4, 2, 5.25, 5.75], "texture": "#2"},
+				"down": {"uv": [4, 5.75, 5.25, 2], "texture": "#2"}
+			}
+		},
+		{
+			"from": [8, 2.25, 7],
+			"to": [8.01, 3.5, 10.75],
+			"rotation": {"angle": 0, "axis": "z", "origin": [8, 2.875, 8.75]},
+			"faces": {
+				"east": {"uv": [4, 2, 5.25, 5.75], "rotation": 90, "texture": "#2"},
+				"west": {"uv": [4, 2, 5.25, 5.75], "rotation": 270, "texture": "#2"}
+			}
+		}
+	],
+	"display": {},
+	"groups": [
+		{
+			"name": "nail",
+			"origin": [8, 3.375, 5.25],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

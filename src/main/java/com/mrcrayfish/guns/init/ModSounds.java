@@ -43,6 +43,8 @@ public class ModSounds
 	public static final RegistryObject<SoundEvent> ENTITY_STUN_GRENADE_EXPLOSION = register("entity.stun_grenade.explosion");
 	public static final RegistryObject<SoundEvent> ENTITY_STUN_GRENADE_RING = register("entity.stun_grenade.ring");
 	public static final RegistryObject<SoundEvent> UI_WEAPON_ATTACH = register("ui.weapon.attach");
+	
+	public static final RegistryObject<SoundEvent> ITEM_NAIL_UZI_FIRE = register("item.nail_uzi.fire");
 
 	private static RegistryObject<SoundEvent> register(String key)
 	{

@@ -2,7 +2,9 @@ package com.mrcrayfish.guns.client;
 
 import com.mrcrayfish.guns.Reference;
 import com.mrcrayfish.guns.client.render.entity.GrenadeRenderer;
+import com.mrcrayfish.guns.client.render.entity.LaserRingRenderer;
 import com.mrcrayfish.guns.client.render.entity.MissileRenderer;
+import com.mrcrayfish.guns.client.render.entity.NailRenderer;
 import com.mrcrayfish.guns.client.render.entity.ProjectileRenderer;
 import com.mrcrayfish.guns.client.render.entity.ThrowableGrenadeRenderer;
 import com.mrcrayfish.guns.init.ModEntities;
@@ -23,6 +25,8 @@ public class GunEntityRenderers
         event.registerEntityRenderer(ModEntities.PROJECTILE.get(), ProjectileRenderer::new);
         event.registerEntityRenderer(ModEntities.GRENADE.get(), GrenadeRenderer::new);
         event.registerEntityRenderer(ModEntities.MISSILE.get(), MissileRenderer::new);
+        event.registerEntityRenderer(ModEntities.LASER_RING.get(), LaserRingRenderer::new);
+        event.registerEntityRenderer(ModEntities.NAIL.get(), NailRenderer::new);
         event.registerEntityRenderer(ModEntities.THROWABLE_GRENADE.get(), ThrowableGrenadeRenderer::new);
         event.registerEntityRenderer(ModEntities.THROWABLE_STUN_GRENADE.get(), ThrowableGrenadeRenderer::new);
     }

@@ -14,7 +14,8 @@
     "damage": 6.5,
     "size": 0.2,
     "speed": 10.0,
-    "life": 25
+    "life": 25,
+    "projectileItem": "cgm:basic_bullet"
   },
   "sounds": {
     "fire": "cgm:item.assault_rifle.fire",

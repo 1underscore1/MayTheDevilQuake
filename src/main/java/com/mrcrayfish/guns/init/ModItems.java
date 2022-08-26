@@ -35,6 +35,10 @@ public class ModItems
     public static final RegistryObject<Item> HEAVY_RIFLE = REGISTER.register("heavy_rifle", () -> new GunItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
 
     public static final RegistryObject<Item> SUPER_SHOTGUN = REGISTER.register("super_shotgun", () -> new GunItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> LASER_PISTOL = REGISTER.register("laser_pistol", () -> new GunItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> NAIL_UZI = REGISTER.register("nail_uzi", () -> new GunItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> NAIL_SHOTGUN = REGISTER.register("nail_shotgun", () -> new GunItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+
     
     public static final RegistryObject<Item> BASIC_BULLET = REGISTER.register("basic_bullet", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
     public static final RegistryObject<Item> ADVANCED_AMMO = REGISTER.register("advanced_bullet", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
@@ -42,6 +46,10 @@ public class ModItems
     public static final RegistryObject<Item> MISSILE = REGISTER.register("missile", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
     public static final RegistryObject<Item> GRENADE = REGISTER.register("grenade", () -> new GrenadeItem(new Item.Properties().tab(GunMod.GROUP), 20 * 4));
     public static final RegistryObject<Item> STUN_GRENADE = REGISTER.register("stun_grenade", () -> new StunGrenadeItem(new Item.Properties().tab(GunMod.GROUP), 72000));
+    public static final RegistryObject<Item> BATTERY = REGISTER.register("battery", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> NAIL = REGISTER.register("nail", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
+
+    public static final RegistryObject<Item> LASER_RING_ITEM = REGISTER.register("laser_ring_item", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
 
     /* Scope Attachments */
     public static final RegistryObject<Item> SHORT_SCOPE = REGISTER.register("short_scope", () -> new ScopeItem(Scope.create(0.1F, 1.55F, GunModifiers.SLOW_ADS).viewFinderOffset(0.4), new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));

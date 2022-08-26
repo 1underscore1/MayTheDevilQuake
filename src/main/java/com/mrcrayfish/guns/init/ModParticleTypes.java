@@ -26,6 +26,8 @@ public class ModParticleTypes
         }
     });
     public static final RegistryObject<SimpleParticleType> BLOOD = REGISTER.register("blood", () -> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> LASER_RING_PARTICLE = REGISTER.register("laser_ring_particle", () -> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> LASER_BLAST = REGISTER.register("laser_blast", () -> new SimpleParticleType(true));
     public static final RegistryObject<ParticleType<TrailData>> TRAIL = REGISTER.register("trail", () -> new ParticleType<>(false, TrailData.DESERIALIZER)
     {
         @Override

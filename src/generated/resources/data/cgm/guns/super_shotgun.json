@@ -17,7 +17,8 @@
     "damage": 100.0,
     "size": 1.0,
     "speed": 10.0,
-    "life": 5
+    "life": 5,
+    "projectileItem": "cgm:shell"
   },
   "sounds": {
     "fire": "cgm:item.shotgun.fire",
@@ -28,7 +29,7 @@
   },
   "display": {
     "flash": {
-      "yOffset": 3.6505,
+      "yOffset": 3.4505,
       "zOffset": -3.81
     }
   },
