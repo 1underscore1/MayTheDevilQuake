@@ -33,8 +33,10 @@
   },
   "display": {
     "flash": {
-      "yOffset": 3.6505,
-      "zOffset": -3.81
+      "yOffset": 3.0,
+      "zOffset": -8.5,
+      "size": 1.5,
+      "flashtype": 2
     }
   },
   "modules": {

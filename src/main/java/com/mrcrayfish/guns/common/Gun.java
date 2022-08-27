@@ -6,6 +6,7 @@ import com.mrcrayfish.guns.GunMod;
 import com.mrcrayfish.guns.Reference;
 import com.mrcrayfish.guns.annotation.Ignored;
 import com.mrcrayfish.guns.annotation.Optional;
+import com.mrcrayfish.guns.client.MuzzleFlashType;
 import com.mrcrayfish.guns.compat.BackpackHelper;
 import com.mrcrayfish.guns.item.attachment.IAttachment;
 import com.mrcrayfish.guns.item.attachment.IScope;
@@ -764,12 +765,14 @@ public final class Gun implements INBTSerializable<CompoundTag>
         public static class Flash extends Positioned
         {
             private double size = 0.5;
+            private int flashtype = 0;
 
             @Override
             public CompoundTag serializeNBT()
             {
                 CompoundTag tag = super.serializeNBT();
                 tag.putDouble("Size", this.size);
+                tag.putInt("FlashType", this.flashtype);
                 return tag;
             }
 
@@ -780,6 +783,10 @@ public final class Gun implements INBTSerializable<CompoundTag>
                 if(tag.contains("Size", Tag.TAG_ANY_NUMERIC))
                 {
                     this.size = tag.getDouble("Size");
+                }
+                if(tag.contains("FlashType", Tag.TAG_ANY_NUMERIC))
+                {
+                	this.flashtype = tag.getInt("FlashType");
                 }
             }
 
@@ -792,6 +799,10 @@ public final class Gun implements INBTSerializable<CompoundTag>
                 {
                     object.addProperty("size", this.size);
                 }
+                if(this.flashtype != 0)
+                {
+                	object.addProperty("flashtype", this.flashtype);
+                }
                 return object;
             }
 
@@ -799,6 +810,7 @@ public final class Gun implements INBTSerializable<CompoundTag>
             {
                 Flash flash = new Flash();
                 flash.size = this.size;
+                flash.flashtype = this.flashtype;
                 flash.xOffset = this.xOffset;
                 flash.yOffset = this.yOffset;
                 flash.zOffset = this.zOffset;
@@ -811,6 +823,14 @@ public final class Gun implements INBTSerializable<CompoundTag>
             public double getSize()
             {
                 return this.size;
+            }
+
+            /**
+             * @return The type of flash used
+             */
+            public double getFlashType()
+            {
+                return this.flashtype;
             }
         }
 
@@ -1676,6 +1696,12 @@ public final class Gun implements INBTSerializable<CompoundTag>
             flash.zOffset = zOffset;
             this.gun.display.flash = flash;
             return this;
+        }
+        
+        public Builder setMuzzleFlashType(MuzzleFlashType flashType)
+        {
+        	this.gun.display.flash.flashtype = flashType.getFlashInt();
+        	return this;
         }
 
         public Builder setZoom(float fovModifier, double xOffset, double yOffset, double zOffset)

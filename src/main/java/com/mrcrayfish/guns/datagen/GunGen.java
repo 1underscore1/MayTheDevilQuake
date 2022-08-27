@@ -1,6 +1,7 @@
 package com.mrcrayfish.guns.datagen;
 
 import com.mrcrayfish.guns.Reference;
+import com.mrcrayfish.guns.client.MuzzleFlashType;
 import com.mrcrayfish.guns.common.GripType;
 import com.mrcrayfish.guns.common.Gun;
 import com.mrcrayfish.guns.init.ModItems;
@@ -287,6 +288,7 @@ public class GunGen extends GunProvider
                 .setAmmoConsumed(1)
                 .setAmmo(ModItems.BATTERY.get())
                 .setProjectileType(ModItems.LASER_RING_ITEM.get())
+                .setProjectileOffset(0.5, 0.14, 0.11)
                 .setDamage(9.0F)
                 .setProjectileSize(0.5F)
                 .setProjectileSpeed(0.5)
@@ -297,7 +299,8 @@ public class GunGen extends GunProvider
                 .setCockSound(ModSounds.ITEM_PISTOL_COCK.get())
                 .setSilencedFireSound(ModSounds.ITEM_PISTOL_SILENCED_FIRE.get())
                 .setEnchantedFireSound(ModSounds.ITEM_PISTOL_ENCHANTED_FIRE.get())
-                .setMuzzleFlash(0.0, 0.0, 0.0, 0.0)
+                .setMuzzleFlash(1.0, 0.0, 3.25, 0.75)
+                .setMuzzleFlashType(MuzzleFlashType.LASER)
                 .setZoom(0.7F, 0.0, 4.9561, -1.0)
                 .setScope(0.75F, 0.0, 3.7, 6.0)
                 .setBarrel(0.5F, 0.0, 3.3, 2.65)
@@ -329,7 +332,8 @@ public class GunGen extends GunProvider
                 .setCockSound(ModSounds.ITEM_RIFLE_COCK.get())
                 .setSilencedFireSound(ModSounds.ITEM_NAIL_UZI_FIRE.get())
                 .setEnchantedFireSound(ModSounds.ITEM_NAIL_UZI_FIRE.get())
-                .setMuzzleFlash(0.35, 0.0, 2.875, 2.175)
+                .setMuzzleFlash(0.5, 0.0, 2.875, 2.175)
+                .setMuzzleFlashType(MuzzleFlashType.POOF)
                 .setZoom(0.8F, 0.0, 3.75, -1.0)
                 .build());
 
@@ -358,7 +362,8 @@ public class GunGen extends GunProvider
                 .setCockSound(ModSounds.ITEM_SHOTGUN_COCK.get())
                 .setSilencedFireSound(ModSounds.ITEM_SHOTGUN_SILENCED_FIRE.get())
                 .setEnchantedFireSound(ModSounds.ITEM_SHOTGUN_ENCHANTED_FIRE.get())
-                .setMuzzleFlash(0.5, 0.0, 3.6505, -3.81)
+                .setMuzzleFlash(1.5, 0.0, 3, -8.5)
+                .setMuzzleFlashType(MuzzleFlashType.POOF)
                 .setZoom(0.7F, 0.0, 5.1, 3.2)
                 .setScope(1.0F, 0.0, 4.4, 4.0)
                 .setBarrel(0.5F, 0.0, 3.6506, -3.8)

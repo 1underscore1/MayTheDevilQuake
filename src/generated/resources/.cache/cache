@@ -27,11 +27,11 @@ e96a9cd56bc3cfcbeb0291cb957dd19a37a3f136 data/cgm/advancements/recipes/cgm/stun_
 4614679ced5549dc6efa21848819cd9d449c52cd data/cgm/guns/bazooka.json
 741b6cbd84b463867dd0236601eb658fcd1b8ec6 data/cgm/guns/grenade_launcher.json
 09b5bcf9f89c57140425e0c8964f6922d06e0cf2 data/cgm/guns/heavy_rifle.json
-59621c2f0356d40ccc5f9bee6554dc9a5cd3448c data/cgm/guns/laser_pistol.json
+c48e88348676751c65f2c7a1bdfdc55279a5affa data/cgm/guns/laser_pistol.json
 e244937777690238788742a8740ab85b649d5bdc data/cgm/guns/machine_pistol.json
 9eea8e67d2582dbe9b610da6950470ff723850bf data/cgm/guns/mini_gun.json
-56fb3538274943785c75a44e261e2ffe52839918 data/cgm/guns/nail_shotgun.json
-97063e83ac643237243c380153fd21ea8fe5fe0d data/cgm/guns/nail_uzi.json
+22caac2fa5a6101aaad9bfbcca628585d6a79a2b data/cgm/guns/nail_shotgun.json
+d3e69c311b8f03713b11ed98dee18b75bad7da22 data/cgm/guns/nail_uzi.json
 e98e36c1292bf7bbb010a2dc912bfd71754232dd data/cgm/guns/pistol.json
 43a1ddab137c1f7199cb3677fb889835f255221f data/cgm/guns/rifle.json
 39998a80ef5afebd87297422887a905c803baac0 data/cgm/guns/shotgun.json

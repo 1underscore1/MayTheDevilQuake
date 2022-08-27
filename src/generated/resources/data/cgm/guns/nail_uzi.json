@@ -33,7 +33,7 @@
     "flash": {
       "yOffset": 2.875,
       "zOffset": 2.175,
-      "size": 0.35
+      "flashtype": 2
     }
   },
   "modules": {

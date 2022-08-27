@@ -17,7 +17,10 @@
     "speed": 0.5,
     "life": 50,
     "trailColor": 65280,
-    "projectileItem": "cgm:laser_ring_item"
+    "projectileItem": "cgm:laser_ring_item",
+    "projectileOffsetX": 0.5,
+    "projectileOffsetY": 0.14,
+    "projectileOffsetZ": 0.11
   },
   "sounds": {
     "fire": "cgm:item.pistol.fire",
@@ -28,7 +31,10 @@
   },
   "display": {
     "flash": {
-      "size": 0.0
+      "yOffset": 3.25,
+      "zOffset": 0.75,
+      "size": 1.0,
+      "flashtype": 1
     }
   },
   "modules": {

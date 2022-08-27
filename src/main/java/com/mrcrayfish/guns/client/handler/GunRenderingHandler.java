@@ -9,6 +9,7 @@ import com.mojang.math.Vector3f;
 import com.mrcrayfish.guns.Config;
 import com.mrcrayfish.guns.Reference;
 import com.mrcrayfish.guns.client.GunRenderType;
+import com.mrcrayfish.guns.client.MuzzleFlashType;
 import com.mrcrayfish.guns.client.render.gun.IOverrideModel;
 import com.mrcrayfish.guns.client.render.gun.ModelOverrides;
 import com.mrcrayfish.guns.client.util.RenderUtil;
@@ -694,12 +695,15 @@ public class GunRenderingHandler
 
         float minU = weapon.isEnchanted() ? 0.5F : 0.0F;
         float maxU = weapon.isEnchanted() ? 1.0F : 0.5F;
+        float inctypeU = 1F/((float) MuzzleFlashType.TOTAL_FLASHES);
+        float mintypeU = inctypeU * (float) modifiedGun.getDisplay().getFlash().getFlashType();
+        float maxtypeU = mintypeU + inctypeU;
         Matrix4f matrix = poseStack.last().pose();
         VertexConsumer builder = buffer.getBuffer(GunRenderType.getMuzzleFlash());
-        builder.vertex(matrix, 0, 0, 0).color(1.0F, 1.0F, 1.0F, 1.0F).uv(maxU, 1.0F).uv2(15728880).endVertex();
-        builder.vertex(matrix, size, 0, 0).color(1.0F, 1.0F, 1.0F, 1.0F).uv(minU, 1.0F).uv2(15728880).endVertex();
-        builder.vertex(matrix, size, size, 0).color(1.0F, 1.0F, 1.0F, 1.0F).uv(minU, 0).uv2(15728880).endVertex();
-        builder.vertex(matrix, 0, size, 0).color(1.0F, 1.0F, 1.0F, 1.0F).uv(maxU, 0).uv2(15728880).endVertex();
+        builder.vertex(matrix, 0, 0, 0).color(1.0F, 1.0F, 1.0F, 1.0F).uv(maxU, maxtypeU).uv2(15728880).endVertex();
+        builder.vertex(matrix, size, 0, 0).color(1.0F, 1.0F, 1.0F, 1.0F).uv(minU, maxtypeU).uv2(15728880).endVertex();
+        builder.vertex(matrix, size, size, 0).color(1.0F, 1.0F, 1.0F, 1.0F).uv(minU, mintypeU).uv2(15728880).endVertex();
+        builder.vertex(matrix, 0, size, 0).color(1.0F, 1.0F, 1.0F, 1.0F).uv(maxU, mintypeU).uv2(15728880).endVertex();
 
         poseStack.popPose();
     }
