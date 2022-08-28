@@ -12,6 +12,7 @@
   },
   "projectile": {
     "item": "cgm:battery",
+    "visible": true,
     "damage": 9.0,
     "size": 0.5,
     "speed": 0.5,
@@ -23,11 +24,11 @@
     "projectileOffsetZ": 0.11
   },
   "sounds": {
-    "fire": "cgm:item.pistol.fire",
+    "fire": "cgm:item.laser_pistol.fire",
     "reload": "cgm:item.pistol.reload",
     "cock": "cgm:item.pistol.cock",
-    "silencedFire": "cgm:item.pistol.silenced_fire",
-    "enchantedFire": "cgm:item.pistol.enchanted_fire"
+    "silencedFire": "cgm:item.laser_pistol.fire",
+    "enchantedFire": "cgm:item.laser_pistol.fire"
   },
   "display": {
     "flash": {
@@ -42,22 +43,6 @@
       "yOffset": 4.9561,
       "zOffset": -1.0,
       "fovModifier": 0.7
-    },
-    "attachments": {
-      "scope": {
-        "yOffset": 3.7,
-        "zOffset": 6.0,
-        "scale": 0.75
-      },
-      "barrel": {
-        "yOffset": 3.3,
-        "zOffset": 2.65,
-        "scale": 0.5
-      },
-      "stock": {
-        "yOffset": 3.3,
-        "zOffset": 7.95
-      }
     }
   }
 }

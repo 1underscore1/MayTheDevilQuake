@@ -290,21 +290,19 @@ public class GunGen extends GunProvider
                 .setProjectileType(ModItems.LASER_RING_ITEM.get())
                 .setProjectileOffset(0.5, 0.14, 0.11)
                 .setDamage(9.0F)
+                .setProjectileVisible(true)
                 .setProjectileSize(0.5F)
                 .setProjectileSpeed(0.5)
                 .setProjectileLife(50)
                 .setProjectileTrailColor(0x00FF00)
-                .setFireSound(ModSounds.ITEM_PISTOL_FIRE.get())
+                .setFireSound(ModSounds.ITEM_LASER_PISTOL_FIRE.get())
                 .setReloadSound(ModSounds.ITEM_PISTOL_RELOAD.get())
                 .setCockSound(ModSounds.ITEM_PISTOL_COCK.get())
-                .setSilencedFireSound(ModSounds.ITEM_PISTOL_SILENCED_FIRE.get())
-                .setEnchantedFireSound(ModSounds.ITEM_PISTOL_ENCHANTED_FIRE.get())
+                .setSilencedFireSound(ModSounds.ITEM_LASER_PISTOL_FIRE.get())
+                .setEnchantedFireSound(ModSounds.ITEM_LASER_PISTOL_FIRE.get())
                 .setMuzzleFlash(1.0, 0.0, 3.25, 0.75)
                 .setMuzzleFlashType(MuzzleFlashType.LASER)
                 .setZoom(0.7F, 0.0, 4.9561, -1.0)
-                .setScope(0.75F, 0.0, 3.7, 6.0)
-                .setBarrel(0.5F, 0.0, 3.3, 2.65)
-                .setStock(1.0F, 0.0, 3.3, 7.95)
                 .build());
 
         this.addGun(new ResourceLocation(Reference.MOD_ID, "nail_uzi"), Gun.Builder.create()
@@ -364,10 +362,7 @@ public class GunGen extends GunProvider
                 .setEnchantedFireSound(ModSounds.ITEM_SHOTGUN_ENCHANTED_FIRE.get())
                 .setMuzzleFlash(1.5, 0.0, 3, -8.5)
                 .setMuzzleFlashType(MuzzleFlashType.POOF)
-                .setZoom(0.7F, 0.0, 5.1, 3.2)
-                .setScope(1.0F, 0.0, 4.4, 4.0)
-                .setBarrel(0.5F, 0.0, 3.6506, -3.8)
-                .setStock(1.0F, 0.0, 3.6506, 8.4)
+                .setZoom(0.7F, 0.0, 7.0, 3.2)
                 .build());
     }
 }

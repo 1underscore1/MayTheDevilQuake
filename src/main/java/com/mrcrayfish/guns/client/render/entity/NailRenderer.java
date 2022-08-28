@@ -20,6 +20,7 @@ import com.mojang.math.Vector3f;
  */
 public class NailRenderer extends EntityRenderer<NailEntity>
 {
+	// Note: All of this is currently redundant because this renderer never gets used because only .isVisible() projectiles get bullet trails
     public NailRenderer(EntityRendererProvider.Context context)
     {
         super(context);
@@ -43,7 +44,7 @@ public class NailRenderer extends EntityRenderer<NailEntity>
         poseStack.mulPose(Vector3f.YP.rotationDegrees(180F));
         poseStack.mulPose(Vector3f.YP.rotationDegrees(entityYaw));
         poseStack.mulPose(Vector3f.XP.rotationDegrees(entity.getXRot() - 90));
-        //poseStack.scale(2.5F, 2.5F, 2.5F);
+        poseStack.scale(0.2F, 0.2F, 0.2F);
         Minecraft.getInstance().getItemRenderer().renderStatic(entity.getItem(), ItemTransforms.TransformType.NONE, 16777215, OverlayTexture.NO_OVERLAY, poseStack, renderTypeBuffer, 0);
         poseStack.popPose();
     }

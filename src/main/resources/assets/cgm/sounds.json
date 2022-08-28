@@ -32,5 +32,6 @@
    "entity.stun_grenade.ring":          { "subtitle": "subtitle.cgm.stun.ring",      "sounds": [{ "name": "cgm:entity/stun_grenade/ring", "stream": true }]},
    "ui.weapon.attach":                  { "subtitle": "subtitle.cgm.attach",         "sounds": [{ "name": "cgm:ui/weapon/attach" }]},
    
-   "item.nail_uzi.fire":                { "subtitle": "subtitle.cgm.fire",           "sounds": [{ "name": "cgm:item/nail_uzi/fire" }]}
+   "item.nail_uzi.fire":                { "subtitle": "subtitle.cgm.fire",           "sounds": [{ "name": "cgm:item/nail_uzi/fire" }]},
+   "item.laser_pistol.fire":            { "subtitle": "subtitle.cgm.fire",           "sounds": [{ "name": "cgm:item/laser_pistol/fire" }]}
 }
