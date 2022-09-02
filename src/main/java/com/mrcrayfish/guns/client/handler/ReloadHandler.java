@@ -2,6 +2,7 @@ package com.mrcrayfish.guns.client.handler;
 
 import com.mrcrayfish.guns.client.KeyBinds;
 import com.mrcrayfish.guns.common.Gun;
+import com.mrcrayfish.guns.common.SpecialAttributeType;
 import com.mrcrayfish.guns.event.GunReloadEvent;
 import com.mrcrayfish.guns.init.ModSyncedDataKeys;
 import com.mrcrayfish.guns.item.GunItem;
@@ -40,6 +41,8 @@ public class ReloadHandler
     private int reloadTimer;
     private int prevReloadTimer;
     private int reloadingSlot;
+    
+    private int reloadSpeed = 5;
 
     private ReloadHandler()
     {
@@ -114,6 +117,13 @@ public class ReloadHandler
                         ModSyncedDataKeys.RELOADING.setValue(player, true);
                         PacketHandler.getPlayChannel().sendToServer(new MessageReload(true));
                         this.reloadingSlot = player.getInventory().selected;
+                        this.reloadSpeed = 5;
+                        
+                        if (gun.getSpecial().hasProperty(SpecialAttributeType.FASTER_RELOAD))
+                        {
+                        	this.reloadSpeed = (int) gun.getSpecial().getPropertyValue(SpecialAttributeType.FASTER_RELOAD);
+                        }
+                        
                         MinecraftForge.EVENT_BUS.post(new GunReloadEvent.Post(player, stack));
                     }
                 }
@@ -123,6 +133,7 @@ public class ReloadHandler
                 ModSyncedDataKeys.RELOADING.setValue(player, false);
                 PacketHandler.getPlayChannel().sendToServer(new MessageReload(false));
                 this.reloadingSlot = -1;
+                this.reloadSpeed = 5;
             }
         }
     }
@@ -133,9 +144,9 @@ public class ReloadHandler
         {
             if(this.startReloadTick == -1)
             {
-                this.startReloadTick = player.tickCount + 5;
+                this.startReloadTick = player.tickCount + this.reloadSpeed;
             }
-            if(this.reloadTimer < 5)
+            if(this.reloadTimer < this.reloadSpeed)
             {
                 this.reloadTimer++;
             }
@@ -152,6 +163,7 @@ public class ReloadHandler
             }
         }
     }
+    
 
     public int getStartReloadTick()
     {
@@ -163,8 +175,13 @@ public class ReloadHandler
         return this.reloadTimer;
     }
 
+    public int getReloadSpeed()
+    {
+        return this.reloadSpeed;
+    }
+
     public float getReloadProgress(float partialTicks)
     {
-        return (this.prevReloadTimer + (this.reloadTimer - this.prevReloadTimer) * partialTicks) / 5F;
+        return (this.prevReloadTimer + (this.reloadTimer - this.prevReloadTimer) * partialTicks) / (float) this.reloadSpeed;
     }
 }

@@ -75,6 +75,9 @@ public class ReloadTracker
     {
         int deltaTicks = player.tickCount - this.startTick;
         int interval = GunEnchantmentHelper.getReloadInterval(this.stack);
+        if (this.gun.getSpecial().hasProperty(SpecialAttributeType.FASTER_RELOAD_INTERVAL)) {
+        	interval = Math.max(1, interval - (int) ((float) this.gun.getSpecial().getPropertyValue(SpecialAttributeType.FASTER_RELOAD_INTERVAL)));
+        }
         return deltaTicks > 0 && deltaTicks % interval == 0;
     }
 

@@ -14,6 +14,7 @@ import com.mrcrayfish.guns.client.render.gun.IOverrideModel;
 import com.mrcrayfish.guns.client.render.gun.ModelOverrides;
 import com.mrcrayfish.guns.client.util.RenderUtil;
 import com.mrcrayfish.guns.common.Gun;
+import com.mrcrayfish.guns.common.SpecialAttributeType;
 import com.mrcrayfish.guns.event.GunFireEvent;
 import com.mrcrayfish.guns.init.ModSyncedDataKeys;
 import com.mrcrayfish.guns.item.GrenadeItem;
@@ -711,7 +712,7 @@ public class GunRenderingHandler
     private void renderReloadArm(PoseStack poseStack, MultiBufferSource buffer, int light, Gun modifiedGun, ItemStack stack, HumanoidArm hand, float translateX)
     {
         Minecraft mc = Minecraft.getInstance();
-        if(mc.player == null || mc.player.tickCount < ReloadHandler.get().getStartReloadTick() || ReloadHandler.get().getReloadTimer() != 5)
+        if(mc.player == null || mc.player.tickCount < ReloadHandler.get().getStartReloadTick() || ReloadHandler.get().getReloadTimer() != ReloadHandler.get().getReloadSpeed())
             return;
 
         Item item = ForgeRegistries.ITEMS.getValue(modifiedGun.getProjectile().getItem());
@@ -724,6 +725,10 @@ public class GunRenderingHandler
         poseStack.translate(translateX * side, 0, 0);
 
         float interval = GunEnchantmentHelper.getReloadInterval(stack);
+        if (modifiedGun.getSpecial().hasProperty(SpecialAttributeType.FASTER_RELOAD_INTERVAL))
+        {
+        	interval = Math.max(1F, interval - (float) modifiedGun.getSpecial().getPropertyValue(SpecialAttributeType.FASTER_RELOAD_INTERVAL));
+        }
         float reload = ((mc.player.tickCount - ReloadHandler.get().getStartReloadTick() + mc.getFrameTime()) % interval) / interval;
         float percent = 1.0F - reload;
         if(percent >= 0.5F)

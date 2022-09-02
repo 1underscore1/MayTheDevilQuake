@@ -44,6 +44,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import java.util.EnumMap;
+import com.mrcrayfish.guns.common.SpecialAttributeType;
+
 /**
  * Author: MrCrayfish
  */
@@ -55,6 +58,7 @@ public class NetworkGunManager extends SimplePreparableReloadListener<Map<GunIte
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(ResourceLocation.class, JsonDeserializers.RESOURCE_LOCATION);
         builder.registerTypeAdapter(GripType.class, JsonDeserializers.GRIP_TYPE);
+        builder.registerTypeAdapter(EnumMap.class, JsonDeserializers.SPECIAL_ATTRIBUTES);
         return builder.create();
     });
 

@@ -39,5 +39,8 @@
       "zOffset": 3.2,
       "fovModifier": 0.7
     }
+  },
+  "special": {
+    "specialAttributes": {}
   }
 }

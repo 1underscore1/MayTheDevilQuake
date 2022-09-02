@@ -27,5 +27,8 @@
       "yOffset": 2.7,
       "zOffset": -11.51
     }
+  },
+  "special": {
+    "specialAttributes": {}
   }
 }

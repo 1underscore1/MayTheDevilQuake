@@ -54,5 +54,12 @@
         "zOffset": 8.2
       }
     }
+  },
+  "special": {
+    "specialAttributes": {
+      "FASTER_RELOAD": 3,
+      "FASTER_RELOAD_INTERVAL": 3.0,
+      "FASTER_ADS": 2.0
+    }
   }
 }

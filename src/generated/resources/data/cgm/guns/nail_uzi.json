@@ -42,5 +42,12 @@
       "zOffset": -1.0,
       "fovModifier": 0.8
     }
+  },
+  "special": {
+    "specialAttributes": {
+      "FASTER_RELOAD": 3,
+      "FASTER_RELOAD_INTERVAL": 3.0,
+      "FASTER_ADS": 2.0
+    }
   }
 }

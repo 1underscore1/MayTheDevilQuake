@@ -55,5 +55,8 @@
         "zOffset": -1.0
       }
     }
+  },
+  "special": {
+    "specialAttributes": {}
   }
 }

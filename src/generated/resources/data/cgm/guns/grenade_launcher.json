@@ -44,5 +44,8 @@
         "zOffset": 8.2
       }
     }
+  },
+  "special": {
+    "specialAttributes": {}
   }
 }

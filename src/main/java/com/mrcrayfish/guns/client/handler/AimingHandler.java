@@ -2,6 +2,7 @@ package com.mrcrayfish.guns.client.handler;
 
 import com.mrcrayfish.guns.GunMod;
 import com.mrcrayfish.guns.common.Gun;
+import com.mrcrayfish.guns.common.SpecialAttributeType;
 import com.mrcrayfish.guns.compat.PlayerReviveHelper;
 import com.mrcrayfish.guns.init.ModBlocks;
 import com.mrcrayfish.guns.init.ModSyncedDataKeys;
@@ -257,6 +258,7 @@ public class AimingHandler
                 {
                     double speed = GunEnchantmentHelper.getAimDownSightSpeed(heldItem);
                     speed = GunModifierHelper.getModifiedAimDownSightSpeed(heldItem, speed);
+                    speed = specialAimSpeedModifier(heldItem, speed);
                     this.currentAim += speed;
                     if(this.currentAim > MAX_AIM_PROGRESS)
                     {
@@ -270,6 +272,7 @@ public class AimingHandler
                 {
                     double speed = GunEnchantmentHelper.getAimDownSightSpeed(heldItem);
                     speed = GunModifierHelper.getModifiedAimDownSightSpeed(heldItem, speed);
+                    speed = specialAimSpeedModifier(heldItem, speed);
                     this.currentAim -= speed;
                     if(this.currentAim < 0)
                     {
@@ -287,6 +290,19 @@ public class AimingHandler
         public double getNormalProgress(float partialTicks)
         {
             return Mth.clamp((this.previousAim + (this.currentAim - this.previousAim) * partialTicks) / MAX_AIM_PROGRESS, 0.0, 1.0);
+        }
+        
+
+        public double specialAimSpeedModifier(ItemStack heldItem, double speed)
+        {
+            if(!(heldItem.getItem() instanceof GunItem))
+                return speed;
+            Gun gun = ((GunItem) heldItem.getItem()).getModifiedGun(heldItem);
+            if (gun.getSpecial().hasProperty(SpecialAttributeType.FASTER_ADS))
+            {
+            	return speed * (double) ((float) gun.getSpecial().getPropertyValue(SpecialAttributeType.FASTER_ADS));
+            }
+            return speed;
         }
     }
 }

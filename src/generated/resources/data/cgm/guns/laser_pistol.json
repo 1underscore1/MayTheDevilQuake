@@ -15,7 +15,7 @@
     "visible": true,
     "damage": 9.0,
     "size": 0.5,
-    "speed": 0.5,
+    "speed": 1.5,
     "life": 50,
     "trailColor": 65280,
     "projectileItem": "cgm:laser_ring_item",
@@ -43,6 +43,13 @@
       "yOffset": 4.9561,
       "zOffset": -1.0,
       "fovModifier": 0.7
+    }
+  },
+  "special": {
+    "specialAttributes": {
+      "FASTER_RELOAD": 3,
+      "FASTER_RELOAD_INTERVAL": 3.0,
+      "FASTER_ADS": 2.0
     }
   }
 }

@@ -1,10 +1,12 @@
 package com.mrcrayfish.guns.entity;
 
 import com.mrcrayfish.guns.Config;
+import com.mrcrayfish.guns.GunMod;
 import com.mrcrayfish.guns.client.handler.AimingHandler;
 import com.mrcrayfish.guns.common.BoundingBoxManager;
 import com.mrcrayfish.guns.common.Gun;
 import com.mrcrayfish.guns.common.Gun.Projectile;
+import com.mrcrayfish.guns.common.SpecialAttributeType;
 import com.mrcrayfish.guns.common.SpreadTracker;
 import com.mrcrayfish.guns.event.GunProjectileHitEvent;
 import com.mrcrayfish.guns.init.ModEnchantments;
@@ -91,6 +93,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
     protected Gun modifiedGun;
     protected Gun.General general;
     protected Gun.Projectile projectile;
+    protected Gun.Special special;
     private ItemStack weapon = ItemStack.EMPTY;
     private ItemStack item = ItemStack.EMPTY;
     protected float additionalDamage = 0.0F;
@@ -111,8 +114,10 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         this.modifiedGun = modifiedGun;
         this.general = modifiedGun.getGeneral();
         this.projectile = modifiedGun.getProjectile();
+        this.special = modifiedGun.getSpecial();
         this.entitySize = new EntityDimensions(this.projectile.getSize(), this.projectile.getSize(), false);
         this.modifiedGravity = modifiedGun.getProjectile().isGravity() ? GunModifierHelper.getModifiedProjectileGravity(weapon, -0.04) : 0.0;
+        this.modifiedGravity = this.special.hasProperty(SpecialAttributeType.INVERSE_GRAVITY) ? -this.modifiedGravity : this.modifiedGravity;
         this.life = GunModifierHelper.getModifiedProjectileLife(weapon, this.projectile.getLife());
 
         /* Get speed and set motion */
@@ -289,6 +294,11 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         if(this.projectile.isGravity())
         {
             this.setDeltaMovement(this.getDeltaMovement().add(0, this.modifiedGravity, 0));
+        }
+        
+        if(this.special.hasProperty(SpecialAttributeType.SLOWING_PROJECTILE))
+        {
+        	this.setDeltaMovement(this.getDeltaMovement().scale((float) this.special.getPropertyValue(SpecialAttributeType.SLOWING_PROJECTILE)));
         }
 
         if(this.tickCount >= this.life)
@@ -554,6 +564,8 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         this.projectile.deserializeNBT(compound.getCompound("Projectile"));
         this.general = new Gun.General();
         this.general.deserializeNBT(compound.getCompound("General"));
+        this.special = new Gun.Special();
+        this.special.deserializeNBT(compound.getCompound("Special"));
         this.modifiedGravity = compound.getDouble("ModifiedGravity");
         this.life = compound.getInt("MaxLife");
     }
@@ -563,6 +575,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
     {
         compound.put("Projectile", this.projectile.serializeNBT());
         compound.put("General", this.general.serializeNBT());
+        compound.put("Special", this.special.serializeNBT());
         compound.putDouble("ModifiedGravity", this.modifiedGravity);
         compound.putInt("MaxLife", this.life);
     }
@@ -572,6 +585,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
     {
         buffer.writeNbt(this.projectile.serializeNBT());
         buffer.writeNbt(this.general.serializeNBT());
+        buffer.writeNbt(this.special.serializeNBT());
         buffer.writeInt(this.shooterId);
         BufferUtil.writeItemStackToBufIgnoreTag(buffer, this.item);
         buffer.writeDouble(this.modifiedGravity);
@@ -585,6 +599,10 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         this.projectile.deserializeNBT(buffer.readNbt());
         this.general = new Gun.General();
         this.general.deserializeNBT(buffer.readNbt());
+        this.special = new Gun.Special();
+        CompoundTag tag = buffer.readNbt();
+        //GunMod.LOGGER.debug(tag);
+        this.special.deserializeNBT(tag);
         this.shooterId = buffer.readInt();
         this.item = BufferUtil.readItemStackFromBufIgnoreTag(buffer);
         this.modifiedGravity = buffer.readDouble();

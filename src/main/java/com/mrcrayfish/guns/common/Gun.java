@@ -1,6 +1,7 @@
 package com.mrcrayfish.guns.common;
 
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mrcrayfish.guns.GunMod;
 import com.mrcrayfish.guns.Reference;
@@ -12,8 +13,13 @@ import com.mrcrayfish.guns.item.attachment.IAttachment;
 import com.mrcrayfish.guns.item.attachment.IScope;
 import com.mrcrayfish.guns.item.attachment.impl.Scope;
 import com.mrcrayfish.guns.util.GunJsonUtil;
+
+import joptsimple.util.EnumConverter;
+
 import com.mrcrayfish.guns.item.GunItem;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -24,6 +30,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.EnumMap;
+import java.util.EnumSet;
+
 import javax.annotation.Nullable;
 
 public final class Gun implements INBTSerializable<CompoundTag>
@@ -33,6 +42,7 @@ public final class Gun implements INBTSerializable<CompoundTag>
     private Sounds sounds = new Sounds();
     private Display display = new Display();
     private Modules modules = new Modules();
+    private Special special = new Special();
 
     public General getGeneral()
     {
@@ -57,6 +67,11 @@ public final class Gun implements INBTSerializable<CompoundTag>
     public Modules getModules()
     {
         return this.modules;
+    }
+    
+    public Special getSpecial()
+    {
+    	return this.special;
     }
 
     public static class General implements INBTSerializable<CompoundTag>
@@ -1133,6 +1148,50 @@ public final class Gun implements INBTSerializable<CompoundTag>
             return modules;
         }
     }
+    
+    public static class Special implements INBTSerializable<CompoundTag>
+    {
+    	private EnumMap<SpecialAttributeType, Object> specialAttributes = new EnumMap<>(SpecialAttributeType.class);
+    	public CompoundTag serializeNBT()
+    	{
+    		CompoundTag tag = new CompoundTag();
+    		specialAttributes.forEach((skey, sval) -> {
+    			skey.writeToTag(tag, sval);
+    		});
+    		return tag;
+    	}
+    	public void deserializeNBT(CompoundTag tag)
+    	{
+    		tag.getAllKeys().forEach(tagkey -> {
+    			SpecialAttributeType skey = SpecialAttributeType.valueOf(tagkey);
+    			specialAttributes.put(skey, skey.readFromTag(tag));
+    		});
+    	}
+    	public JsonObject toJsonObject()
+    	{
+    		JsonObject object = new JsonObject();
+    		this.specialAttributes.forEach((skey, sval) -> {
+    			skey.addToJsonObject(object, sval);
+    		});
+    		JsonObject object2 = new JsonObject();
+    		object2.add("specialAttributes", object);
+    		return object2;
+    	}
+    	public Special copy()
+    	{
+    		Special special = new Special();
+    		special.specialAttributes.putAll(this.specialAttributes);
+    		return special;
+    	}
+    	public boolean hasProperty(SpecialAttributeType specialAttribute)
+    	{
+    		return this.specialAttributes.containsKey(specialAttribute);
+    	}
+    	public Object getPropertyValue(SpecialAttributeType specialAttribute)
+    	{
+    		return this.specialAttributes.get(specialAttribute);
+    	}
+    }
 
     public static class Positioned implements INBTSerializable<CompoundTag>
     {
@@ -1280,6 +1339,7 @@ public final class Gun implements INBTSerializable<CompoundTag>
         tag.put("Sounds", this.sounds.serializeNBT());
         tag.put("Display", this.display.serializeNBT());
         tag.put("Modules", this.modules.serializeNBT());
+        tag.put("Special", this.special.serializeNBT());
         return tag;
     }
 
@@ -1306,6 +1366,10 @@ public final class Gun implements INBTSerializable<CompoundTag>
         {
             this.modules.deserializeNBT(tag.getCompound("Modules"));
         }
+        if(tag.contains("Special", Tag.TAG_COMPOUND))
+        {
+            this.special.deserializeNBT(tag.getCompound("Special"));
+        }
     }
 
     public JsonObject toJsonObject()
@@ -1316,6 +1380,7 @@ public final class Gun implements INBTSerializable<CompoundTag>
         GunJsonUtil.addObjectIfNotEmpty(object, "sounds", this.sounds.toJsonObject());
         GunJsonUtil.addObjectIfNotEmpty(object, "display", this.display.toJsonObject());
         GunJsonUtil.addObjectIfNotEmpty(object, "modules", this.modules.toJsonObject());
+        GunJsonUtil.addObjectIfNotEmpty(object, "special", this.special.toJsonObject());
         return object;
     }
 
@@ -1334,6 +1399,7 @@ public final class Gun implements INBTSerializable<CompoundTag>
         gun.sounds = this.sounds.copy();
         gun.display = this.display.copy();
         gun.modules = this.modules.copy();
+        gun.special = this.special.copy();
         return gun;
     }
 
@@ -1757,6 +1823,18 @@ public final class Gun implements INBTSerializable<CompoundTag>
             positioned.zOffset = zOffset;
             this.gun.modules.attachments.underBarrel = positioned;
             return this;
+        }
+        
+        public Builder addSpecialProperty(SpecialAttributeType specialAttribute) 
+        {
+        	this.gun.special.specialAttributes.put(specialAttribute, 0);
+        	return this;
+        }
+        
+        public Builder addSpecialProperty(SpecialAttributeType specialAttribute, Object value) 
+        {
+        	this.gun.special.specialAttributes.put(specialAttribute, value);
+        	return this;
         }
     }
 }

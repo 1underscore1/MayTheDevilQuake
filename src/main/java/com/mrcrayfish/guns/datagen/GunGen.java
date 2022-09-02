@@ -4,6 +4,7 @@ import com.mrcrayfish.guns.Reference;
 import com.mrcrayfish.guns.client.MuzzleFlashType;
 import com.mrcrayfish.guns.common.GripType;
 import com.mrcrayfish.guns.common.Gun;
+import com.mrcrayfish.guns.common.SpecialAttributeType;
 import com.mrcrayfish.guns.init.ModItems;
 import com.mrcrayfish.guns.init.ModSounds;
 import net.minecraft.data.DataGenerator;
@@ -144,6 +145,9 @@ public class GunGen extends GunProvider
                 .setScope(1.0F, 0.0, 4.0, 5.5)
                 .setBarrel(0.5F, 0.0, 3.2, 2.2)
                 .setStock(1.0F, 0.0,3.2, 8.2)
+                .addSpecialProperty(SpecialAttributeType.FASTER_ADS, 2.0F)
+                .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD, 3)
+                .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD_INTERVAL, 3F)
                 .build());
 
         this.addGun(new ResourceLocation(Reference.MOD_ID, "mini_gun"), Gun.Builder.create()
@@ -190,6 +194,9 @@ public class GunGen extends GunProvider
                 .setScope(0.75F, 0.0, 3.7, 6.0)
                 .setBarrel(0.5F, 0.0, 3.3, 2.65)
                 .setStock(1.0F, 0.0, 3.3, 7.95)
+                .addSpecialProperty(SpecialAttributeType.FASTER_ADS, 2.0F)
+                .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD, 3)
+                .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD_INTERVAL, 3F)
                 .build());
 
         this.addGun(new ResourceLocation(Reference.MOD_ID, "rifle"), Gun.Builder.create()
@@ -292,7 +299,7 @@ public class GunGen extends GunProvider
                 .setDamage(9.0F)
                 .setProjectileVisible(true)
                 .setProjectileSize(0.5F)
-                .setProjectileSpeed(0.5)
+                .setProjectileSpeed(1.5)
                 .setProjectileLife(50)
                 .setProjectileTrailColor(0x00FF00)
                 .setFireSound(ModSounds.ITEM_LASER_PISTOL_FIRE.get())
@@ -303,6 +310,9 @@ public class GunGen extends GunProvider
                 .setMuzzleFlash(1.0, 0.0, 3.25, 0.75)
                 .setMuzzleFlashType(MuzzleFlashType.LASER)
                 .setZoom(0.7F, 0.0, 4.9561, -1.0)
+                .addSpecialProperty(SpecialAttributeType.FASTER_ADS, 2.0F)
+                .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD, 3)
+                .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD_INTERVAL, 3F)
                 .build());
 
         this.addGun(new ResourceLocation(Reference.MOD_ID, "nail_uzi"), Gun.Builder.create()
@@ -333,6 +343,9 @@ public class GunGen extends GunProvider
                 .setMuzzleFlash(0.5, 0.0, 2.875, 2.175)
                 .setMuzzleFlashType(MuzzleFlashType.POOF)
                 .setZoom(0.8F, 0.0, 3.75, -1.0)
+                .addSpecialProperty(SpecialAttributeType.FASTER_ADS, 2.0F)
+                .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD, 3)
+                .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD_INTERVAL, 3F)
                 .build());
 
         this.addGun(new ResourceLocation(Reference.MOD_ID, "nail_shotgun"), Gun.Builder.create()
