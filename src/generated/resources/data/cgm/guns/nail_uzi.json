@@ -47,7 +47,8 @@
     "specialAttributes": {
       "FASTER_RELOAD": 3,
       "FASTER_RELOAD_INTERVAL": 3.0,
-      "FASTER_ADS": 2.0
+      "FASTER_ADS": 2.0,
+      "OVERRIDE_SPLASH_DAMAGE": 2.0
     }
   }
 }

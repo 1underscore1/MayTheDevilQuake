@@ -6,6 +6,7 @@ import com.mrcrayfish.guns.entity.LaserRingEntity;
 import com.mrcrayfish.guns.entity.MissileEntity;
 import com.mrcrayfish.guns.entity.NailEntity;
 import com.mrcrayfish.guns.entity.ProjectileEntity;
+import com.mrcrayfish.guns.entity.RocketPodEntity;
 import com.mrcrayfish.guns.entity.ThrowableGrenadeEntity;
 import com.mrcrayfish.guns.entity.ThrowableStunGrenadeEntity;
 import net.minecraft.world.entity.Entity;
@@ -30,6 +31,7 @@ public class ModEntities
     public static final RegistryObject<EntityType<MissileEntity>> MISSILE = registerBasic("missile", MissileEntity::new);
     public static final RegistryObject<EntityType<LaserRingEntity>> LASER_RING = registerBasic("laser_ring", LaserRingEntity::new);
     public static final RegistryObject<EntityType<NailEntity>> NAIL = registerBasic("nail", NailEntity::new);
+    public static final RegistryObject<EntityType<RocketPodEntity>> ROCKET_POD = registerBasic("rocket_pod", RocketPodEntity::new);
     public static final RegistryObject<EntityType<ThrowableGrenadeEntity>> THROWABLE_GRENADE = registerBasic("throwable_grenade", ThrowableGrenadeEntity::new);
     public static final RegistryObject<EntityType<ThrowableStunGrenadeEntity>> THROWABLE_STUN_GRENADE = registerBasic("throwable_stun_grenade", ThrowableStunGrenadeEntity::new);
 

@@ -29,6 +29,7 @@ public class PacketHandler
             .registerPlayMessage(MessageProjectileHitBlock.class, NetworkDirection.PLAY_TO_CLIENT)
             .registerPlayMessage(MessageProjectileHitEntity.class, NetworkDirection.PLAY_TO_CLIENT)
             .registerPlayMessage(MessageRemoveProjectile.class, NetworkDirection.PLAY_TO_CLIENT)
+            //.registerPlayMessage(MessageBFGSickness.class, NetworkDirection.PLAY_TO_SERVER)
             .build();
 
     /**

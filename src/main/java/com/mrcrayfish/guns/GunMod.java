@@ -17,6 +17,7 @@ import com.mrcrayfish.guns.entity.GrenadeEntity;
 import com.mrcrayfish.guns.entity.MissileEntity;
 import com.mrcrayfish.guns.entity.LaserRingEntity;
 import com.mrcrayfish.guns.entity.NailEntity;
+import com.mrcrayfish.guns.entity.RocketPodEntity;
 import com.mrcrayfish.guns.init.*;
 import com.mrcrayfish.guns.network.PacketHandler;
 import net.minecraft.core.NonNullList;
@@ -99,6 +100,7 @@ public class GunMod
             ProjectileManager.getInstance().registerFactory(ModItems.MISSILE.get(), (worldIn, entity, weapon, item, modifiedGun) -> new MissileEntity(ModEntities.MISSILE.get(), worldIn, entity, weapon, item, modifiedGun));
             ProjectileManager.getInstance().registerFactory(ModItems.LASER_RING_ITEM.get(), (worldIn, entity, weapon, item, modifiedGun) -> new LaserRingEntity(ModEntities.LASER_RING.get(), worldIn, entity, weapon, item, modifiedGun));
             ProjectileManager.getInstance().registerFactory(ModItems.NAIL.get(), (worldIn, entity, weapon, item, modifiedGun) -> new NailEntity(ModEntities.NAIL.get(), worldIn, entity, weapon, item, modifiedGun));
+            ProjectileManager.getInstance().registerFactory(ModItems.ROCKET_POD.get(), (worldIn, entity, weapon, item, modifiedGun) -> new RocketPodEntity(ModEntities.ROCKET_POD.get(), worldIn, entity, weapon, item, modifiedGun));
             
             PacketHandler.init();
             if(Config.COMMON.gameplay.improvedHitboxes.get())

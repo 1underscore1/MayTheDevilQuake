@@ -9,6 +9,7 @@ import com.mrcrayfish.guns.annotation.Ignored;
 import com.mrcrayfish.guns.annotation.Optional;
 import com.mrcrayfish.guns.client.MuzzleFlashType;
 import com.mrcrayfish.guns.compat.BackpackHelper;
+import com.mrcrayfish.guns.init.ModEffects;
 import com.mrcrayfish.guns.item.attachment.IAttachment;
 import com.mrcrayfish.guns.item.attachment.IScope;
 import com.mrcrayfish.guns.item.attachment.impl.Scope;

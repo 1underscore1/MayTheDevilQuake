@@ -66,6 +66,7 @@ public class GunGen extends GunProvider
                 .setReloadSound(ModSounds.ITEM_PISTOL_RELOAD.get())
                 .setMuzzleFlash(2.0, 0.0, 4.3, -8.01)
                 .setZoom(0.5F, 3.5, 4.3, 16.0)
+                .addSpecialProperty(SpecialAttributeType.OVERRIDE_SPLASH_DAMAGE, 10.0F)
                 .build());
 
         this.addGun(new ResourceLocation(Reference.MOD_ID, "grenade_launcher"), Gun.Builder.create()
@@ -88,6 +89,7 @@ public class GunGen extends GunProvider
                 .setZoom(0.6F, 0.0, 5.7, 3.0)
                 .setScope(1.0F, 0.0, 5.2, 2.7)
                 .setStock(1.0F, 0.0, 3.6, 8.2)
+                .addSpecialProperty(SpecialAttributeType.OVERRIDE_SPLASH_DAMAGE, 4.0F)
                 .build());
 
         this.addGun(new ResourceLocation(Reference.MOD_ID, "heavy_rifle"), Gun.Builder.create()
@@ -346,6 +348,7 @@ public class GunGen extends GunProvider
                 .addSpecialProperty(SpecialAttributeType.FASTER_ADS, 2.0F)
                 .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD, 3)
                 .addSpecialProperty(SpecialAttributeType.FASTER_RELOAD_INTERVAL, 3F)
+                .addSpecialProperty(SpecialAttributeType.OVERRIDE_SPLASH_DAMAGE, 2F)
                 .build());
 
         this.addGun(new ResourceLocation(Reference.MOD_ID, "nail_shotgun"), Gun.Builder.create()
@@ -376,6 +379,32 @@ public class GunGen extends GunProvider
                 .setMuzzleFlash(1.5, 0.0, 3, -8.5)
                 .setMuzzleFlashType(MuzzleFlashType.POOF)
                 .setZoom(0.7F, 0.0, 7.0, 3.2)
+                .build());
+
+        this.addGun(new ResourceLocation(Reference.MOD_ID, "gatling_rocket_shotgun"), Gun.Builder.create()
+                .setAuto(true)
+                .setFireRate(4)
+                .setGripType(GripType.MINI_GUN)
+                .setMaxAmmo(18)
+                .setReloadAmount(5)
+                .setRecoilAngle(1.0F)
+                .setAlwaysSpread(true)
+                .setSpread(30.0F)
+                .setAmmo(ModItems.ROCKET_POD.get())
+                .setDamage(60.0F)
+                .setProjectileSize(1F)
+                .setProjectileSpeed(1.0F)
+                .setProjectileLife(200)
+                .setProjectileAmount(5)
+                .setProjectileOffset(0.0, 0.13, 0.1)
+                .setProjectileTrailColor(0xFFBB55)
+                .setAmmoConsumed(3)
+                .setFireSound(ModSounds.ITEM_GRENADE_LAUNCHER_FIRE.get())
+                .setReloadSound(ModSounds.ITEM_PISTOL_RELOAD.get())
+                .setEnchantedFireSound(ModSounds.ITEM_MINI_GUN_ENCHANTED_FIRE.get())
+                .setMuzzleFlash(2.5, 0.0, 2.0, -4.01)
+                .addSpecialProperty(SpecialAttributeType.OVERRIDE_SPLASH_DAMAGE, 8F)
+                .addSpecialProperty(SpecialAttributeType.BFG, 20*10)
                 .build());
     }
 }

@@ -1,6 +1,8 @@
 package com.mrcrayfish.guns.world;
 
 import com.google.common.collect.Sets;
+import com.mrcrayfish.guns.GunMod;
+
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import net.minecraft.world.entity.Entity;
@@ -38,8 +40,10 @@ public class ProjectileExplosion extends Explosion
     private final float size;
     private final Entity exploder;
     private final ExplosionDamageCalculator context;
+    
+    private final float splashDamageCap;
 
-    public ProjectileExplosion(Level world, Entity exploder, @Nullable DamageSource source, @Nullable ExplosionDamageCalculator context, double x, double y, double z, float size, boolean causesFire, BlockInteraction mode)
+    public ProjectileExplosion(Level world, Entity exploder, @Nullable DamageSource source, @Nullable ExplosionDamageCalculator context, double x, double y, double z, float size, boolean causesFire, BlockInteraction mode, float splashDamageCap)
     {
         super(world, exploder, source, context, x, y, z, size, causesFire, mode);
         this.world = world;
@@ -49,6 +53,12 @@ public class ProjectileExplosion extends Explosion
         this.size = size;
         this.exploder = exploder;
         this.context = context == null ? DEFAULT_CONTEXT : context;
+        this.splashDamageCap = splashDamageCap;
+    }
+    
+    public ProjectileExplosion(Level world, Entity exploder, @Nullable DamageSource source, @Nullable ExplosionDamageCalculator context, double x, double y, double z, float size, boolean causesFire, BlockInteraction mode)
+    {
+    	this(world, exploder, source, context, x, y, z, size, causesFire, mode, -1.0F);
     }
 
     @Override
@@ -146,11 +156,31 @@ public class ProjectileExplosion extends Explosion
             double blockDensity = (double) getSeenPercent(explosionPos, entity);
             double damage = (1.0D - strength) * blockDensity;
             float finalDamage = (float) ((int) ((damage * damage + damage) / 2.0D * 7.0D * (double) radius + 1.0D));
-            if(finalDamage > 4.0 && entity instanceof Player player)
+            if(this.splashDamageCap != -1.0F && finalDamage > this.splashDamageCap)
             {
-            	finalDamage = 4.0F;
+            	finalDamage = this.splashDamageCap;
             }
+//            GunMod.LOGGER.debug("Doing projectile explosion damage");
+//            GunMod.LOGGER.debug("Entity 1: " + entity.toString());
+//            if (this.getDamageSource().getEntity() == null)
+//            {
+//                GunMod.LOGGER.debug("Entity 2 is null");
+//            }
+//            else
+//            {
+//                GunMod.LOGGER.debug("Entity 2 is " + this.getDamageSource().getEntity().toString());
+//            }
             entity.hurt(this.getDamageSource(), finalDamage);
+            if (entity.is(this.getDamageSource().getEntity()))
+            {
+            	//GunMod.LOGGER.debug("Setting invulnerability");
+            	entity.invulnerableTime = 15;
+            }
+            else
+            {
+            	entity.invulnerableTime = 0;
+            }
+            
 
             double blastDamage = damage;
             if(entity instanceof LivingEntity)

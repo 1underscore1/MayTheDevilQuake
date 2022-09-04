@@ -1,6 +1,7 @@
 package com.mrcrayfish.guns.init;
 
 import com.mrcrayfish.guns.Reference;
+import com.mrcrayfish.guns.effect.BFGSicknessEffect;
 import com.mrcrayfish.guns.effect.IncurableEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -17,4 +18,5 @@ public class ModEffects
 
     public static final RegistryObject<IncurableEffect> BLINDED = REGISTER.register("blinded", () -> new IncurableEffect(MobEffectCategory.HARMFUL, 0));
     public static final RegistryObject<IncurableEffect> DEAFENED = REGISTER.register("deafened", () -> new IncurableEffect(MobEffectCategory.HARMFUL, 0));
+    public static final RegistryObject<MobEffect> BFG_SICKNESS = REGISTER.register("bfg_sickness", () -> new BFGSicknessEffect(MobEffectCategory.HARMFUL, 0));
 }

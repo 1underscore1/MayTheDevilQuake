@@ -21,9 +21,37 @@ public enum SpecialAttributeType {
      * Cast to float.
      */
 	FASTER_RELOAD_INTERVAL(SpecialDataType.FLOAT_DATA),
+	/**
+     * Multiplies ADS speed by this number.
+     * <p>
+     * Cast to float.
+     */
 	FASTER_ADS(SpecialDataType.FLOAT_DATA),
+	/**
+     * Multiplies the projectile's speed by this number every tick.
+     * <p>
+     * Cast to float.
+     */
 	SLOWING_PROJECTILE(SpecialDataType.FLOAT_DATA),
-	INVERSE_GRAVITY(SpecialDataType.NO_DATA);
+	/**
+     * Reverses gravity for projectiles.
+     * <p>
+     * Has no attached data.
+     */
+	INVERSE_GRAVITY(SpecialDataType.NO_DATA),
+	/**
+     * Overrides how much splash damage this projectile should deal, if it is an exploding projectile.
+     * <p>
+     * Cast to float.
+     */
+	OVERRIDE_SPLASH_DAMAGE(SpecialDataType.FLOAT_DATA),
+	/**
+     * Indicates this weapon is a BFG. BFG-class weapons inflict the "BFG Sickness" status effect once you stop firing them, and
+     * cannot be fired while you have BFG Sickness. The attached data is the duration of the status effect, in ticks.
+     * <p>
+     * Cast to integer.
+     */
+	BFG(SpecialDataType.INT_DATA);
 	private SpecialDataType specialDataType;
 	private enum SpecialDataType {
 		NO_DATA{

@@ -187,15 +187,29 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
             if(!modifiedGun.getGeneral().isAlwaysSpread())
             {
                 gunSpread *= SpreadTracker.get((Player) shooter).getSpread(item);
-            }
 
-            if(ModSyncedDataKeys.AIMING.getValue((Player) shooter))
-            {
-                gunSpread *= 0.5F;
+                if(ModSyncedDataKeys.AIMING.getValue((Player) shooter))
+                {
+                    gunSpread *= 0.5F;
+                }
             }
         }
+        
+        gunSpread = Math.min(gunSpread, 170F) * 0.5F * Mth.DEG_TO_RAD;
+        
+        Vec3 vecforwards = this.getVectorFromRotation(shooter.getXRot(), shooter.getYRot());
+        Vec3 vecupwards = this.getVectorFromRotation(shooter.getXRot() + 90F, shooter.getYRot());
+        Vec3 vecsideways = vecforwards.cross(vecupwards);
+        
+        float theta = random.nextFloat() * 2F * (float) Math.PI;
+        float r = Mth.sqrt(random.nextFloat()) * (float) Math.tan((double) gunSpread);
+        
+        float a1 = Mth.cos(theta) * r;
+        float a2 = Mth.sin(theta) * r;
+        
+        return vecforwards.add(vecsideways.scale(a1)).add(vecupwards.scale(a2)).normalize();
 
-        return this.getVectorFromRotation(shooter.getXRot() - (gunSpread / 2.0F) + random.nextFloat() * gunSpread, shooter.getYHeadRot() - (gunSpread / 2.0F) + random.nextFloat() * gunSpread);
+        //return this.getVectorFromRotation(shooter.getXRot() - (gunSpread / 2.0F) + random.nextFloat() * gunSpread, shooter.getYHeadRot() - (gunSpread / 2.0F) + random.nextFloat() * gunSpread);
     }
 
     public void setWeapon(ItemStack weapon)
@@ -831,10 +845,23 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         Level world = entity.level;
         if(world.isClientSide())
             return;
-
+        
+        
+        
         DamageSource source = entity instanceof ProjectileEntity projectile ? DamageSource.explosion(projectile.getShooter()) : null;
         Explosion.BlockInteraction mode = Config.COMMON.gameplay.griefing.enableBlockRemovalOnExplosions.get() && !forceNone ? Explosion.BlockInteraction.BREAK : Explosion.BlockInteraction.NONE;
-        Explosion explosion = new ProjectileExplosion(world, entity, source, null, entity.getX(), entity.getY(), entity.getZ(), radius, false, mode);
+
+        Explosion explosion;
+        
+        if (entity instanceof ProjectileEntity projectile && projectile.special.hasProperty(SpecialAttributeType.OVERRIDE_SPLASH_DAMAGE)) {
+        	explosion = new ProjectileExplosion(world, entity, source, null, entity.getX(), entity.getY(), entity.getZ(), radius, false, mode, (float) projectile.special.getPropertyValue(SpecialAttributeType.OVERRIDE_SPLASH_DAMAGE));
+        }
+        else
+        {
+        	explosion = new ProjectileExplosion(world, entity, source, null, entity.getX(), entity.getY(), entity.getZ(), radius, false, mode);
+        }
+        
+        
 
         if(net.minecraftforge.event.ForgeEventFactory.onExplosionStart(world, explosion))
             return;

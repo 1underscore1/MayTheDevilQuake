@@ -46,6 +46,8 @@
     }
   },
   "special": {
-    "specialAttributes": {}
+    "specialAttributes": {
+      "OVERRIDE_SPLASH_DAMAGE": 4.0
+    }
   }
 }

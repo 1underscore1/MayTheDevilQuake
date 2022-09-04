@@ -1,0 +1,43 @@
+{
+  "general": {
+    "auto": true,
+    "rate": 4,
+    "gripType": "cgm:mini_gun",
+    "maxAmmo": 18,
+    "reloadAmount": 5,
+    "recoilAngle": 1.0,
+    "projectileAmount": 5,
+    "alwaysSpread": true,
+    "spread": 30.0,
+    "ammoConsumed": 3
+  },
+  "projectile": {
+    "item": "cgm:rocket_pod",
+    "damage": 60.0,
+    "size": 1.0,
+    "speed": 1.0,
+    "life": 200,
+    "trailColor": 16759637,
+    "projectileItem": "cgm:rocket_pod",
+    "projectileOffsetY": 0.13,
+    "projectileOffsetZ": 0.1
+  },
+  "sounds": {
+    "fire": "cgm:item.grenade_launcher.fire",
+    "reload": "cgm:item.pistol.reload",
+    "enchantedFire": "cgm:item.mini_gun.enchanted_fire"
+  },
+  "display": {
+    "flash": {
+      "yOffset": 2.0,
+      "zOffset": -4.01,
+      "size": 2.5
+    }
+  },
+  "special": {
+    "specialAttributes": {
+      "OVERRIDE_SPLASH_DAMAGE": 8.0,
+      "BFG": 200
+    }
+  }
+}

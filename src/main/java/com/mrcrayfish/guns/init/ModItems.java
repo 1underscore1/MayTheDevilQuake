@@ -39,6 +39,8 @@ public class ModItems
     public static final RegistryObject<Item> NAIL_UZI = REGISTER.register("nail_uzi", () -> new GunItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
     public static final RegistryObject<Item> NAIL_SHOTGUN = REGISTER.register("nail_shotgun", () -> new GunItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
 
+    public static final RegistryObject<Item> GATLING_ROCKET_SHOTGUN = REGISTER.register("gatling_rocket_shotgun", () -> new GunItem(new Item.Properties().stacksTo(1).tab(GunMod.GROUP)));
+
     
     public static final RegistryObject<Item> BASIC_BULLET = REGISTER.register("basic_bullet", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
     public static final RegistryObject<Item> ADVANCED_AMMO = REGISTER.register("advanced_bullet", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
@@ -48,6 +50,7 @@ public class ModItems
     public static final RegistryObject<Item> STUN_GRENADE = REGISTER.register("stun_grenade", () -> new StunGrenadeItem(new Item.Properties().tab(GunMod.GROUP), 72000));
     public static final RegistryObject<Item> BATTERY = REGISTER.register("battery", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
     public static final RegistryObject<Item> NAIL = REGISTER.register("nail", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
+    public static final RegistryObject<Item> ROCKET_POD = REGISTER.register("rocket_pod", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
 
     public static final RegistryObject<Item> LASER_RING_ITEM = REGISTER.register("laser_ring_item", () -> new AmmoItem(new Item.Properties().tab(GunMod.GROUP)));
 

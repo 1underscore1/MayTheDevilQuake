@@ -6,6 +6,7 @@ import com.mrcrayfish.guns.client.render.entity.LaserRingRenderer;
 import com.mrcrayfish.guns.client.render.entity.MissileRenderer;
 import com.mrcrayfish.guns.client.render.entity.NailRenderer;
 import com.mrcrayfish.guns.client.render.entity.ProjectileRenderer;
+import com.mrcrayfish.guns.client.render.entity.RocketPodRenderer;
 import com.mrcrayfish.guns.client.render.entity.ThrowableGrenadeRenderer;
 import com.mrcrayfish.guns.init.ModEntities;
 import net.minecraftforge.api.distmarker.Dist;
@@ -27,6 +28,7 @@ public class GunEntityRenderers
         event.registerEntityRenderer(ModEntities.MISSILE.get(), MissileRenderer::new);
         event.registerEntityRenderer(ModEntities.LASER_RING.get(), LaserRingRenderer::new);
         event.registerEntityRenderer(ModEntities.NAIL.get(), NailRenderer::new);
+        event.registerEntityRenderer(ModEntities.ROCKET_POD.get(), RocketPodRenderer::new);
         event.registerEntityRenderer(ModEntities.THROWABLE_GRENADE.get(), ThrowableGrenadeRenderer::new);
         event.registerEntityRenderer(ModEntities.THROWABLE_STUN_GRENADE.get(), ThrowableGrenadeRenderer::new);
     }

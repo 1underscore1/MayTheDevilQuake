@@ -74,6 +74,8 @@ public class ClientHandler
         MinecraftForge.EVENT_BUS.register(ShootingHandler.get());
         MinecraftForge.EVENT_BUS.register(SoundHandler.get());
         MinecraftForge.EVENT_BUS.register(new PlayerModelHandler());
+        
+        MinecraftForge.EVENT_BUS.register(BFGSicknessHandler.get());
 
         /* Only register controller events if Controllable is loaded otherwise it will crash */
         if(GunMod.controllableLoaded)
@@ -152,6 +154,7 @@ public class ClientHandler
         ModelOverrides.register(ModItems.LASER_PISTOL.get(), new SimpleModel(SpecialModels.LASER_PISTOL::getModel));
         ModelOverrides.register(ModItems.NAIL_UZI.get(), new NailUziModel());
         ModelOverrides.register(ModItems.NAIL_SHOTGUN.get(), new NailShotgunModel());
+        ModelOverrides.register(ModItems.GATLING_ROCKET_SHOTGUN.get(), new SimpleModel(SpecialModels.GATLING_ROCKET_SHOTGUN::getModel));
 
         /* Attachments */
         ModelOverrides.register(ModItems.SHORT_SCOPE.get(), new ShortScopeModel());

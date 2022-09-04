@@ -37,7 +37,8 @@ public enum SpecialModels
     NAIL_UZI_NAIL("nail_uzi_nail"),
     NAIL_SHOTGUN("gun/nail_shotgun"),
     NAIL_SHOTGUN_BASE("nail_shotgun_base"),
-    NAIL_SHOTGUN_BARRELS("nail_shotgun_barrels");
+    NAIL_SHOTGUN_BARRELS("nail_shotgun_barrels"),
+    GATLING_ROCKET_SHOTGUN("gun/gatling_rocket_shotgun");
 
     /**
      * The location of an item model in the [MOD_ID]/models/special/[NAME] folder
