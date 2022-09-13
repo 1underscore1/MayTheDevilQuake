@@ -12,6 +12,8 @@ import net.minecraftforge.network.NetworkEvent;
 public class MessageBFGSickness extends PlayMessage<MessageBFGSickness> {
 	private int tickCount;
 	
+	public MessageBFGSickness() {}
+	
 	public MessageBFGSickness(int tickCount)
 	{
 		this.tickCount = tickCount;

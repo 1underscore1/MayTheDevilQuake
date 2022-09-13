@@ -23,13 +23,13 @@ public class PacketHandler
             .registerPlayMessage(MessageBulletTrail.class, NetworkDirection.PLAY_TO_CLIENT)
             .registerPlayMessage(MessageAttachments.class, NetworkDirection.PLAY_TO_SERVER)
             .registerPlayMessage(MessageUpdateGuns.class, NetworkDirection.PLAY_TO_CLIENT)
+            .registerPlayMessage(MessageBFGSickness.class, NetworkDirection.PLAY_TO_SERVER)
             .registerPlayMessage(MessageBlood.class, NetworkDirection.PLAY_TO_CLIENT)
             .registerPlayMessage(MessageShooting.class, NetworkDirection.PLAY_TO_SERVER)
             .registerPlayMessage(MessageGunSound.class, NetworkDirection.PLAY_TO_CLIENT)
             .registerPlayMessage(MessageProjectileHitBlock.class, NetworkDirection.PLAY_TO_CLIENT)
             .registerPlayMessage(MessageProjectileHitEntity.class, NetworkDirection.PLAY_TO_CLIENT)
             .registerPlayMessage(MessageRemoveProjectile.class, NetworkDirection.PLAY_TO_CLIENT)
-            //.registerPlayMessage(MessageBFGSickness.class, NetworkDirection.PLAY_TO_SERVER)
             .build();
 
     /**

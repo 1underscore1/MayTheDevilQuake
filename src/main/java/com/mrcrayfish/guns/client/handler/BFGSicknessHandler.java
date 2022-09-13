@@ -115,7 +115,7 @@ public class BFGSicknessHandler {
 	
 	public void applySickness(Player player)
 	{
-        //PacketHandler.getPlayChannel().sendToServer(new MessageBFGSickness(this.BFGSicknessTicks));
+        PacketHandler.getPlayChannel().sendToServer(new MessageBFGSickness(this.BFGSicknessTicks));
 		this.BFGSicknessStage = 2;
 		this.BFGSlot = -99;
 	}
